@@ -211,7 +211,7 @@ defmodule Ueberauth.Strategy.Helpers do
   end
 
   defp redirect_port(conn) do
-    p = System.get_env("REDIRECT_PORT") || from_private(conn, :request_port)
+    p = System.get_env("REDIRECT_PORT") || from_private(conn, :request_port) || "443"
 
     String.to_integer("#{p}")
   end
