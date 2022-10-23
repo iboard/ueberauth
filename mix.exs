@@ -1,7 +1,7 @@
 defmodule Ueberauth.Mixfile do
   use Mix.Project
 
-  @source_url "https://github.com/ueberauth/ueberauth"
+  @source_url "https://github.com/iboard/ueberauth"
   @version "0.10.3"
 
   def project do
@@ -62,7 +62,7 @@ defmodule Ueberauth.Mixfile do
   defp package do
     [
       files: ["lib", "mix.exs", "CHANGELOG.md", "README.md", "LICENSE"],
-      maintainers: ["Sonny Scroggin", "Daniel Neighman", "Sean Callan"],
+      maintainers: ["Andreas Altendorfer (iboard)", "Sonny Scroggin", "Daniel Neighman", "Sean Callan"],
       licenses: ["MIT"],
       links: %{
         "Changelog" => "https://hexdocs.pm/ueberauth/changelog.html",

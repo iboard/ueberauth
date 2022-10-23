@@ -9,6 +9,13 @@
 [![License](https://img.shields.io/hexpm/l/ueberauth.svg)](https://github.com/ueberauth/ueberauth/blob/master/LICENSE)
 [![Last Updated](https://img.shields.io/github/last-commit/ueberauth/ueberauth.svg)](https://github.com/ueberauth/ueberauth/commits/master)
 
+## ORIGINAL 'ueberauth/ueberauth' MODIFIED BY Andreas Altendorfer at 'iboard/ueberauth'
+
+This modified version reads the ENV-var 'OAUTH_FORCE_HTTPS_CALLBACK=yes,true,https,force'
+Since it is hard to configure an https-callback which is running in a http container behind
+a proxy (NGINX) that terminates the https-request but calls the backend at http.
+
+## ORIGINAL README
 
 > An Elixir Authentication System for Plug-based Web Applications
 

@@ -48,8 +48,8 @@ defmodule Ueberauth.Strategy.Helpers do
   @spec request_url(Plug.Conn.t()) :: String.t()
   def request_url(conn, query_params \\ []) do
     opts = [
-      scheme: from_private(conn, :request_scheme),
-      port: from_private(conn, :request_port),
+      scheme: redirect_scheme(conn),
+      port: redirect_port(conn),
       path: request_path(conn),
       query_params: query_params
     ]
@@ -76,6 +76,15 @@ defmodule Ueberauth.Strategy.Helpers do
       ]
 
       full_url(conn, opts)
+      |> maybe_force_https()
+    end
+  end
+
+  defp maybe_force_https(url) do
+    if System.get_env("OAUTH_FORCE_HTTPS_CALLBACK") not in ~w/true yes force https/ do
+      url
+    else
+      String.replace_leading(url, "http://", "https://")
     end
   end
 
@@ -199,6 +208,16 @@ defmodule Ueberauth.Strategy.Helpers do
     else
       Keyword.put(opts, :state, state)
     end
+  end
+
+  defp redirect_port(conn) do
+    p = System.get_env("REDIRECT_PORT") || from_private(conn, :request_port)
+
+    String.to_integer("#{p}")
+  end
+
+  defp redirect_scheme(conn) do
+    System.get_env("REDIRECT_SCHEME") || from_private(conn, :request_scheme)
   end
 
   defp from_private(conn, key) do
